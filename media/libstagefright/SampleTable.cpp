@@ -277,10 +277,6 @@ status_t SampleTable::setSampleToChunkParams(
     for (uint32_t i = 0; i < mNumSampleToChunkOffsets; ++i) {
         uint8_t buffer[sizeof(SampleToChunkEntry)];
 
-        if ((off64_t)(INT64_MAX - 8 - (i * 12)) < mSampleToChunkOffset) {
-            return ERROR_MALFORMED;
-        }
-
         if (mDataSource->readAt(
                     mSampleToChunkOffset + 8 + i * sizeof(SampleToChunkEntry),
                     buffer,
@@ -391,7 +387,6 @@ status_t SampleTable::setTimeToSampleParams(
         // 2) mTimeToSampleCount is the number of entries of the time-to-sample
         //    table.
         // 3) We hope that the table size does not exceed UINT32_MAX.
-
         ALOGE("Time-to-sample table size too large.");
         return ERROR_OUT_OF_RANGE;
     }

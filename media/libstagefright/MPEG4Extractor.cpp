@@ -611,8 +611,6 @@ status_t MPEG4Extractor::readMetaData() {
     }
     if (psshsize > 0 && psshsize <= UINT32_MAX) {
         char *buf = (char*)malloc(psshsize);
-        CHECK(buf != NULL);
-
         if (!buf) {
             ALOGE("b/28471206");
             return NO_MEMORY;
